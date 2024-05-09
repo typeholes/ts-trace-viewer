@@ -1,6 +1,6 @@
 <template>
   <q-page class="row items-evenly justify-start">
-    <q-card style="width: 100%" class="q-pa-sm">
+    <q-card style="width: 100%" class="q-pa-sm dark">
       <br />
       <TraceFile />
       <pre></pre>

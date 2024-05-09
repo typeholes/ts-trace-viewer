@@ -1,4 +1,4 @@
-// import { z } from 'zod';
+import { z } from 'zod';
 import type * as vscode from 'vscode';
 import { initTRPC } from '@trpc/server';
 import { createTRPCProxyClient, httpBatchLink } from '@trpc/client';
@@ -20,6 +20,12 @@ export function mkAppRouter(vs: typeof vscode) {
         return '/home/hw/projects/ts-diag-transform';
       }
       return vs.workspace.workspaceFolders?.[0]?.name;
+    }),
+    openFile: t.procedure.input(z.string()).query((opts) => {
+      const fileName = opts.input;
+      vs.commands.executeCommand('vscode.open', vs.Uri.parse(fileName));
+
+      return 'opened';
     }),
   });
 

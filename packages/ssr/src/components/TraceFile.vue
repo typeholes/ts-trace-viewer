@@ -1,6 +1,7 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script setup lang="ts">
 import { appState } from 'src/appState';
+import { trpc } from 'src/trpcRouter';
 import { computed, ref } from 'vue';
 
 const names = computed(() => {
@@ -23,6 +24,11 @@ const selectedLines = computed(
 );
 
 const selectedName = ref('checkExpression');
+
+function openFile(fileName: string | undefined) {
+  if (!fileName) return;
+  trpc.openFile.query(fileName);
+}
 </script>
 
 <template>
@@ -30,8 +36,16 @@ const selectedName = ref('checkExpression');
     <q-select label="Name" :options="names" v-model="selectedName" />
     <div class="rows">
       <div v-for="line of selectedLines" :key="line.ts">
-        {{ line.name }} : {{ Math.round(line.dur ?? 0 / 1000) / 1000 }}
-        {{ line.args?.pos }} {{ line.args?.path?.replace(appState.projectPath??'.','.') }}
+        <q-card @click="openFile(line.args?.path)">
+          {{ line.name }} : {{ Math.round(line.dur ?? 0 / 1000) / 1000 }}
+          {{ line.args?.pos }}
+          {{
+            line.args?.path?.replace(
+              new RegExp(`^.*${appState.projectPath ?? '.'}/`),
+              '.',
+            )
+          }}
+        </q-card>
       </div>
     </div>
   </div>
