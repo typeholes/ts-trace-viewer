@@ -22,7 +22,7 @@ const selectedLines = computed(
       .sort((a, b) => b.dur! - a.dur!),
 );
 
-const selectedName = ref('');
+const selectedName = ref('checkExpression');
 </script>
 
 <template>
