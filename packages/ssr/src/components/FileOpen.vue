@@ -37,8 +37,10 @@ async function getFileData() {
   const obj = JSON.parse(await file.text());
   const traceLine = TraceLine.safeParse(obj);
   if (traceLine.error) {
+    appState[props.valueKey] = undefined;
     error.value = JSON.stringify(traceLine.error, null, 2);
   } else {
+    error.value = '';
     appState[props.valueKey] = traceLine.data as any;
   }
 }
