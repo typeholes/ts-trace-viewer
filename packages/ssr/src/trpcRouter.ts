@@ -28,10 +28,13 @@ export function mkAppRouter(vs: typeof vscode) {
 
 export type AppRouter = ReturnType<typeof mkAppRouter>;
 
-export const trpc = createTRPCProxyClient<AppRouter>({
-  links: [
-    httpBatchLink({
-      url: 'http://localhost:9100/trpc',
-    }),
-  ],
-});
+export const mkTrpc = (port: string) =>
+  createTRPCProxyClient<AppRouter>({
+    links: [
+      httpBatchLink({
+        url: `http://localhost:${port}/trpc`,
+      }),
+    ],
+  });
+
+export const trpc = mkTrpc(globalThis?.location?.port ?? 3000);
