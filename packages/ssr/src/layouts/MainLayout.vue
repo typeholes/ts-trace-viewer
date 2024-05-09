@@ -23,6 +23,9 @@
         <q-item>
           <FileOpen nameKey="traceFileName" valueKey="traceFileData" />
         </q-item>
+        <q-item>
+          <q-btn label="Ping" @click="ping" />
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -36,6 +39,7 @@
 import { ref } from 'vue';
 import { appState } from 'src/appState';
 import FileOpen from 'components/FileOpen.vue';
+import { trpc } from 'src/trpcRouter';
 
 defineOptions({
   name: 'MainLayout',
@@ -45,5 +49,9 @@ const leftDrawerOpen = ref(true);
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
+}
+
+function ping() {
+  trpc.ping.query();
 }
 </script>

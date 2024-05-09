@@ -1,19 +1,15 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <q-btn label="Ping" @click="ping" />
 
     <br />
+    <TraceFile />
     <pre>
-      {{ JSON.stringify(appState.traceFileData, null, 2) }}
     </pre>
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { trpc } from 'src/trpcRouter';
-import { appState } from 'src/appState';
+import TraceFile from 'src/components/TraceFile.vue';
 
-function ping() {
-  trpc.ping.query();
-}
+
 </script>
