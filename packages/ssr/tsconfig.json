@@ -1,5 +1,6 @@
 {
   "extends": "@quasar/app-vite/tsconfig-preset",
+  "noErrorTruncation": true,
   "compilerOptions": {
     "baseUrl": "."
   },

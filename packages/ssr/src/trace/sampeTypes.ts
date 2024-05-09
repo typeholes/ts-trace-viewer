@@ -34666,3 +34666,5 @@ export const sampleTypes: Record<string, any>[] = [
       '(step: string, program: SemanticDiagnosticsBuilderProgram) => void',
   },
 ];
+
+
