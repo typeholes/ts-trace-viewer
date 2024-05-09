@@ -3,9 +3,6 @@
     <q-btn label="Ping" @click="ping" />
 
     <br />
-    <FileOpen nameKey="traceFileName" valueKey="traceFileData" />
-    <br />
-    {{ appState.traceFileName }}
     <pre>
       {{ JSON.stringify(appState.traceFileData, null, 2) }}
     </pre>
@@ -14,7 +11,6 @@
 
 <script setup lang="ts">
 import { trpc } from 'src/trpcRouter';
-import FileOpen from 'components/FileOpen.vue';
 import { appState } from 'src/appState';
 
 function ping() {
