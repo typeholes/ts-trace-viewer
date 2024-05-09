@@ -8,7 +8,18 @@ export function mkAppRouter(vs: typeof vscode) {
 
   const appRouter = t.router({
     ping: t.procedure.query(() => {
-      return 'pinged';
+      if (vs) {
+        vs.window.showInformationMessage('pinged from front end');
+        return 'pinged';
+      } else {
+        return 'no vs';
+      }
+    }),
+    projectPath: t.procedure.query(() => {
+      if (!vs) {
+        return '/home/hw/projects/ts-diag-transform';
+      }
+      return vs.workspace.workspaceFolders?.[0]?.name;
     }),
   });
 
@@ -20,7 +31,7 @@ export type AppRouter = ReturnType<typeof mkAppRouter>;
 export const trpc = createTRPCProxyClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'http://localhost:3000/trpc',
+      url: 'http://localhost:9100/trpc',
     }),
   ],
 });

@@ -31,7 +31,7 @@ const selectedName = ref('');
     <div class="rows">
       <div v-for="line of selectedLines" :key="line.ts">
         {{ line.name }} : {{ Math.round(line.dur ?? 0 / 1000) / 1000 }}
-        {{ line.args?.pos }} {{ line.args?.path }}
+        {{ line.args?.pos }} {{ line.args?.path?.replace(appState.projectPath??'.','.') }}
       </div>
     </div>
   </div>

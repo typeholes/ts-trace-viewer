@@ -143,7 +143,7 @@ module.exports = configure(function (/* ctx */) {
       // (gets superseded if process.env.PORT is specified at runtime)
 
       middlewares: [
-        'vsapi',
+        'vscodeApi',
         'render', // keep this as last one
       ],
     },

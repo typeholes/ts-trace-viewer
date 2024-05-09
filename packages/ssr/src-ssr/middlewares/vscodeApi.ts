@@ -4,11 +4,12 @@ import * as trpcExpress from '@trpc/server/adapters/express';
 import { mkAppRouter } from 'src/trpcRouter';
 import type * as vscode from 'vscode';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-declare interface global {
-  vs: typeof vscode;
+declare global {
+  // eslint-disable-next-line no-var
+  var vs: typeof vscode;
+  // eslint-disable-next-line no-var
+  var tsTraceViewerPort: number;
 }
-
 const vs = globalThis.vs;
 
 // "async" is optional;
