@@ -26,7 +26,18 @@
           Trace File: {{ appState.traceFileName }}
         </q-item-label>
         <q-item>
-          <FileOpen nameKey="traceFileName" valueKey="traceFileData" />
+          <FileOpen
+            nameKey="traceFileName"
+            valueKey="traceFileData"
+            label="trace"
+          />
+        </q-item>
+        <q-item>
+          <FileOpen
+            nameKey="typeFileName"
+            valueKey="typeFileData"
+            label="type"
+          />
         </q-item>
         <q-item>
           <q-btn label="Ping" @click="ping" />
