@@ -1,13 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { appState } from '../appState';
 import { getFileDataHandler } from 'src/processFile';
-
-const props = defineProps<{
-  nameKey: keyof typeof appState;
-  valueKey: keyof typeof appState;
-  label: string;
-}>();
 
 const pickerOpts = {
   types: [
@@ -22,7 +14,6 @@ const pickerOpts = {
   multiple: false,
 };
 
-const error = ref('');
 async function getFileData() {
   // @ts-expect-error window access
   const [fileHandle] = await window.showOpenFilePicker(pickerOpts);
@@ -33,16 +24,13 @@ async function getFileData() {
 
   const handler = getFileDataHandler(file.name);
   if (handler) {
-    handler(await file.text);
+    handler(await file.text());
   }
 }
 </script>
 
 <template>
   <div>
-    <q-btn :label="`Open ${props.label} file`" @click="getFileData" />
-    <pre style="color: red">
-      {{ error }}
-    </pre>
+    <q-btn label="Open trace file" @click="getFileData" />
   </div>
 </template>

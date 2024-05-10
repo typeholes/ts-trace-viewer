@@ -4,24 +4,28 @@ import { appState } from 'src/appState';
 import { trpc } from 'src/trpcRouter';
 import { computed, ref } from 'vue';
 import TypesDuring from 'components/TypesDuring.vue';
+import { TraceLine } from 'src/traceData';
 
 const names = computed(() => {
-  if (appState.traceFileData === undefined) {
+  if (appState.data === undefined) {
     return [];
   }
 
   const names = new Set<string>();
-  for (const line of appState.traceFileData) {
-    names.add(line.name);
+  for (const line of appState.data) {
+    if ('name' in line) names.add(line.name);
   }
   return [...names.values()].sort();
 });
 
 const selectedLines = computed(
   () =>
-    appState.traceFileData
-      ?.filter((x) => x.name === selectedName.value && (x.dur ?? 0) !== 0)
-      .sort((a, b) => b.dur! - a.dur!),
+    appState.data
+      ?.filter(
+        (x) =>
+          'name' in x && x.name === selectedName.value && (x.dur ?? 0) !== 0,
+      )
+      .sort((a, b) => b.dur! - a.dur!) as TraceLine[],
 );
 
 const selectedName = ref('checkExpression');
@@ -49,7 +53,7 @@ function openFile(fileName: string | undefined) {
             : {{ line.args?.pos }}
           </div>
           <div>
-          <TypesDuring :ts="line.ts" :duration="line.dur ?? 0" />
+            <TypesDuring :ts="line.ts" :duration="line.dur ?? 0" />
           </div>
         </q-card>
       </div>

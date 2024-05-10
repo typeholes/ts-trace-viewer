@@ -9,7 +9,8 @@ export function getFileDataHandler(fileName: string) {
     handler = handleTypes;
   }
 
-  return handler && ((text: string) => handler(fileName, text));
+  const ret = handler;
+  return ret && ((text: string) => ret(fileName, text));
 }
 
 function handleTrace(fileName: string, text: string) {
