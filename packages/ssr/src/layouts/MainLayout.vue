@@ -22,22 +22,12 @@
         <q-item-label header>
           Project: {{ appState.projectPath }}
         </q-item-label>
-        <q-item-label header>
-          Trace File: {{ appState.traceFileName }}
-        </q-item-label>
         <q-item>
-          <FileOpen
-            nameKey="traceFileName"
-            valueKey="traceFileData"
-            label="trace"
-          />
+          <FileOpen />
         </q-item>
+
         <q-item>
-          <FileOpen
-            nameKey="typeFileName"
-            valueKey="typeFileData"
-            label="type"
-          />
+          <q-btn label="Process Trace Files" @click="processTraceData" />
         </q-item>
         <q-item>
           <q-btn label="Ping" @click="ping" />
@@ -56,6 +46,7 @@ import { ref } from 'vue';
 import { appState } from 'src/appState';
 import FileOpen from 'components/FileOpen.vue';
 import { trpc } from 'src/trpcRouter';
+import { processTraceData } from 'src/appState';
 
 defineOptions({
   name: 'MainLayout',

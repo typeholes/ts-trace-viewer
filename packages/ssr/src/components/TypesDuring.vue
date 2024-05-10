@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { appState } from 'src/appState';
+import { TypeLine } from 'src/traceData';
 import { computed } from 'vue';
 
 const props = defineProps<{ ts: number; duration: number }>();
 
-const types = computed(() =>
-  (appState.typeFileData ?? [])
-    .filter((x) => x.ts >= props.ts && x.ts < props.ts + props.duration)
-    // .sort((a, b) => (b.dur ?? 0) - (a.dur ?? 0)),
+const types = computed(
+  () =>
+    (appState.data ?? []).filter(
+      (x) => 'id' in x && x.ts >= props.ts && x.ts < props.ts + props.duration,
+    ) as TypeLine[],
+  // .sort((a, b) => (b.dur ?? 0) - (a.dur ?? 0)),
 );
 </script>
 
