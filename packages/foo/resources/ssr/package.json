@@ -1,0 +1,32 @@
+{
+  "name": "ts-trace-viewer-ssr",
+  "version": "0.0.1",
+  "description": "front end for ts-trace-viewer",
+  "author": "typeholes <typeholes@protonmail.net>",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@quasar/extras": "1.16.11",
+    "@trpc/client": "10.45.2",
+    "@trpc/server": "10.45.2",
+    "@types/vscode": "1.89.0",
+    "axios": "1.6.8",
+    "quasar": "2.16.2",
+    "vue": "3.4.27",
+    "vue-router": "4.3.2",
+    "zod": "3.23.7",
+    "compression": "^1.7.4",
+    "express": "^4.17.3",
+    "serialize-javascript": "^6.0.0"
+  },
+  "engines": {
+    "node": "^20 || ^18 || ^16",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  },
+  "quasar": {
+    "ssr": true
+  }
+}
