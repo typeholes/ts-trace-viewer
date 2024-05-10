@@ -4,7 +4,8 @@
   "description": "front end for ts-trace-viewer",
   "productName": "ts-trace-viewer-ssr",
   "author": "typeholes <typeholes@protonmail.net>",
-  "private": true,
+  "private": false,
+  "license": "MIT",
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
