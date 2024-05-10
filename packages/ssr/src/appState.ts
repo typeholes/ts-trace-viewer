@@ -1,12 +1,22 @@
 import { reactive } from 'vue';
-import { TraceLine } from './traceLine';
 import { trpc } from './trpcRouter';
+import { TraceData } from './traceData';
 
-export const appState = reactive({
-  traceFileName: undefined as string | undefined,
-  traceFileData: undefined as TraceLine | undefined,
-  projectPath: 'Not loaded' as string | undefined,
-});
+interface AppState {
+  projectPath: string;
+  error: string;
+  traceFiles: Record<
+    string,
+    { name: string; type: 'trace' | 'type'; data: TraceData }
+  >;
+}
+
+const _appState: AppState = {
+  projectPath: 'Not loaded',
+  error: '',
+  traceFiles: {},
+};
+export const appState = reactive(_appState);
 
 trpc.projectPath
   .query()

@@ -3,6 +3,7 @@
 import { appState } from 'src/appState';
 import { trpc } from 'src/trpcRouter';
 import { computed, ref } from 'vue';
+import TypesDuring from 'components/TypesDuring.vue';
 
 const names = computed(() => {
   if (appState.traceFileData === undefined) {
@@ -34,17 +35,22 @@ function openFile(fileName: string | undefined) {
 <template>
   <div>
     <q-select label="Name" :options="names" v-model="selectedName" />
-    <div class="rows">
+    <div class="column">
       <div v-for="line of selectedLines" :key="line.ts">
-        <q-card @click="openFile(line.args?.path)">
-          {{ line.name }} : {{ Math.round(line.dur ?? 0 / 1000) / 1000 }}
-          {{ line.args?.pos }}
-          {{
-            line.args?.path?.replace(
-              new RegExp(`^.*${appState.projectPath ?? '.'}/`),
-              '.',
-            )
-          }}
+        <q-card @click="openFile(line.args?.path)" class="column">
+          <div>
+            {{ line.name }} : {{ Math.round(line.dur ?? 0 / 1000) / 1000 }}
+            {{
+              line.args?.path?.replace(
+                new RegExp(`^.*${appState.projectPath ?? '.'}/`),
+                '.',
+              )
+            }}
+            : {{ line.args?.pos }}
+          </div>
+          <div>
+          <TypesDuring :ts="line.ts" :duration="line.dur ?? 0" />
+          </div>
         </q-card>
       </div>
     </div>

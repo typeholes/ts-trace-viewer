@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { appState } from '../appState';
-import { TraceLine } from 'src/traceLine';
+import { getFileDataHandler } from 'src/processFile';
 
 const props = defineProps<{
   nameKey: keyof typeof appState;
   valueKey: keyof typeof appState;
+  label: string;
 }>();
 
 const pickerOpts = {
@@ -28,27 +29,18 @@ async function getFileData() {
 
   // get file contents
   const file = await fileHandle.getFile();
-  if (file && 'name' in file && file.name) {
-    appState[props.nameKey] = file.name;
-  } else {
-    return;
-  }
+  if (!(file && 'name' in file && file.name)) return;
 
-  const obj = JSON.parse(await file.text());
-  const traceLine = TraceLine.safeParse(obj);
-  if (traceLine.error) {
-    appState[props.valueKey] = undefined;
-    error.value = JSON.stringify(traceLine.error, null, 2);
-  } else {
-    error.value = '';
-    appState[props.valueKey] = traceLine.data as any;
+  const handler = getFileDataHandler(file.name);
+  if (handler) {
+    handler(await file.text);
   }
 }
 </script>
 
 <template>
   <div>
-    <q-btn label="Open Trace File" @click="getFileData" />
+    <q-btn :label="`Open ${props.label} file`" @click="getFileData" />
     <pre style="color: red">
       {{ error }}
     </pre>
