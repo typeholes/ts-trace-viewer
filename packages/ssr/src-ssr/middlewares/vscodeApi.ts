@@ -9,7 +9,32 @@ declare global {
   var vs: typeof vscode;
   // eslint-disable-next-line no-var
   var tsTraceViewerPort: number;
+
+  // eslint-disable-next-line no-var
+  var tsTraceViewer: {
+    durationWarning: number;
+    addTraceDiagnostic(
+      fileName: string,
+      pos: number,
+      end: number,
+      duration: number,
+    ): void;
+    clearTraceDiagnostic(): void;
+  };
 }
+
+const tsTraceViewer = (globalThis.tsTraceViewer ??= {
+  durationWarning: 15,
+  addTraceDiagnostic: () => {
+    /**/
+  },
+  clearTraceDiagnostic: () => {
+    /**/
+  },
+});
+
+console.log(tsTraceViewer);
+
 const vs = globalThis.vs;
 
 // "async" is optional;
@@ -18,7 +43,7 @@ export default ssrMiddleware(
   async ({ app /*, resolveUrlPath, publicPath, render */ }) => {
     // created for each request
 
-    const appRouter = mkAppRouter(vs);
+    const appRouter = mkAppRouter(vs, tsTraceViewer);
 
     // created for each request
     const createContext = ({

@@ -3,5 +3,3 @@ out
 .vscode
 
 node_modules
-
-**/*.vsix
