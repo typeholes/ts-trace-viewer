@@ -1,7 +1,10 @@
 import { z } from 'zod';
 import type * as vscode from 'vscode';
 import { initTRPC } from '@trpc/server';
-import { createTRPCProxyClient, httpBatchLink, httpLink } from '@trpc/client';
+import {
+  createTRPCProxyClient,
+  /*wsLink, createWSClient*/ httpLink,
+} from '@trpc/client';
 
 type TsTraceViewer = {
   durationWarning: number;
@@ -85,6 +88,8 @@ export function mkAppRouter(vs: typeof vscode, tsTraceViewer: TsTraceViewer) {
 
 export type AppRouter = ReturnType<typeof mkAppRouter>;
 
+
+
 export const mkTrpc = (port: string) =>
   createTRPCProxyClient<AppRouter>({
     links: [
@@ -95,5 +100,19 @@ export const mkTrpc = (port: string) =>
       }),
     ],
   });
+
+
+// export const mkTrpc = (port: string) => {
+//   // const wsClient = createWSClient({
+//   //   url: `ws://localhost:${port}`,
+//   // });
+//   // const trpcClient = createTRPCProxyClient<AppRouter>({
+//   //   links: [wsLink<AppRouter>({ client: wsClient })],
+//   // });
+//   const trpcClient = createTRPCProxyClient<AppRouter>({
+//     links: [httpLink({ url: `http://localhost:${port}/trpc/` })],
+//   });
+//   return trpcClient;
+// };
 
 export const trpc = mkTrpc(globalThis?.location?.port ?? '3000');

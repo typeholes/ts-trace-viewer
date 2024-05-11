@@ -1,4 +1,4 @@
-import { b as boot } from "./index.30198bce.js";
+import { b as boot } from "./index.354d01ba.js";
 function bind(fn, thisArg) {
   return function wrap() {
     return fn.apply(thisArg, arguments);

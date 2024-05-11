@@ -48,7 +48,7 @@ declare namespace globalThis {
    };
 }
 
-let durationWarning = 1 * 1000 * 1000;
+export let durationWarning = 1 * 1000 * 1000;
 globalThis.tsTraceViewer = {
    ...(globalThis.tsTraceViewer ?? {}),
    ...{
@@ -79,7 +79,7 @@ vscode.workspace.onDidChangeConfiguration((e) => {
    }
 });
 
-async function gotoPosition(fileName: string, pos: number) {
+export async function gotoPosition(fileName: string, pos: number) {
    const vs = vscode;
    const uri = vs.Uri.file(fileName);
    const document = await vs.workspace.openTextDocument(uri);

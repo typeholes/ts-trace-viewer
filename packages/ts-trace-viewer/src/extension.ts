@@ -5,16 +5,18 @@ import * as vscode from 'vscode';
 import { TsTraceProvider } from './data';
 import { registerCommands } from './contributions';
 import { initDiagnostics } from './diagnostics';
+import { startServer } from './server/server';
 
 declare global {
    var vs: typeof vscode;
 }
 globalThis['vs'] = vscode;
 
-// @ts-expect-error  not bothering to type this
-const foo = import('../resources/ssr/index.js').then((server) => {
-   console.log('server loaded');
-});
+// // @ts-expect-error  not bothering to type this
+// const foo = import('../resources/ssr/index.js').then((server) => {
+//    console.log('server loaded');
+// });
+
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -27,6 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
 
    registerCommands(context);
    initDiagnostics(context);
+   startServer();
 }
 
 // This method is called when your extension is deactivated

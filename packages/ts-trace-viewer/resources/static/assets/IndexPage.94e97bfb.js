@@ -1,6 +1,6 @@
-import { u as useDarkProps, a as useDark, c as clearSelection, m as getScrollbarWidth, b as useModelToggleProps, s as scrollTargetProp, d as useModelToggleEmits, e as useTimeout, f as useModelToggle, j as getScrollTarget, g as useHistory, i as usePreventScroll, q as normalizeToInterval, Q as QItemLabel, o as QItem, n as appState, t as trpc } from "./appState.57efa897.js";
-import { c as createComponent, a as computed, h, g as getCurrentInstance, f as inject, j as emptyRenderFn, k as layoutKey, C as pageContainerKey, i as isRuntimeSsrPreHydration, r as ref, o as onMounted, w as watch, Y as onBeforeUpdate, d as onBeforeUnmount, Z as formKey, _ as debounce, $ as injectProp, z as stopAndPrevent, e as nextTick, W as onDeactivated, a0 as onActivated, u as prevent, T as Transition, S as isKeyCode, s as addEvt, y as cleanEvt, l as listenOpts, a1 as globalConfig, E as onUnmounted, a2 as Teleport, p as client, x as position, a3 as onBeforeMount, a4 as onUpdated, a5 as isDeepEqual, v as stop, a6 as shouldIgnoreKey, F as defineComponent, G as openBlock, O as createBlock, P as withCtx, R as createBaseVNode, M as toDisplayString, H as createElementBlock, I as createVNode, J as Fragment, K as renderList, Q as createTextVNode, L as unref, a7 as createCommentVNode } from "./index.30198bce.js";
-import { h as hSlot, i as QIcon, j as QSpinner, k as useSizeProps, l as useSize, b as hDir, m as hMergeSlotSafely, R as Ripple, n as getParentProxy, f as vmIsDestroyed, o as childHasFocus, c as hMergeSlot, Q as QBtn } from "./QBtn.0e063299.js";
+import { u as useDarkProps, a as useDark, c as clearSelection, m as getScrollbarWidth, b as useModelToggleProps, s as scrollTargetProp, d as useModelToggleEmits, e as useTimeout, f as useModelToggle, j as getScrollTarget, g as useHistory, i as usePreventScroll, q as normalizeToInterval, Q as QItemLabel, o as QItem, n as appState, t as trpc } from "./appState.69b87002.js";
+import { c as createComponent, a as computed, h, g as getCurrentInstance, f as inject, j as emptyRenderFn, k as layoutKey, C as pageContainerKey, i as isRuntimeSsrPreHydration, r as ref, o as onMounted, w as watch, Y as onBeforeUpdate, d as onBeforeUnmount, Z as formKey, _ as debounce, $ as injectProp, z as stopAndPrevent, e as nextTick, W as onDeactivated, a0 as onActivated, u as prevent, T as Transition, S as isKeyCode, s as addEvt, y as cleanEvt, l as listenOpts, a1 as globalConfig, E as onUnmounted, a2 as Teleport, p as client, x as position, n as noop, a3 as onBeforeMount, a4 as onUpdated, a5 as isDeepEqual, v as stop, a6 as shouldIgnoreKey, F as defineComponent, G as openBlock, O as createBlock, P as withCtx, R as createBaseVNode, M as toDisplayString, H as createElementBlock, I as createVNode, J as Fragment, K as renderList, Q as createTextVNode, L as unref, a7 as createCommentVNode } from "./index.354d01ba.js";
+import { h as hSlot, i as QIcon, j as QSpinner, k as useSizeProps, l as useSize, b as hDir, m as hMergeSlotSafely, R as Ripple, n as getParentProxy, f as vmIsDestroyed, o as childHasFocus, c as hMergeSlot, Q as QBtn } from "./QBtn.62120c33.js";
 var QCard = createComponent({
   name: "QCard",
   props: {
@@ -2189,6 +2189,26 @@ var QDialog = createComponent({
     return renderPortal;
   }
 });
+let rtlHasScrollBug = false;
+{
+  const scroller = document.createElement("div");
+  scroller.setAttribute("dir", "rtl");
+  Object.assign(scroller.style, {
+    width: "1px",
+    height: "1px",
+    overflow: "auto"
+  });
+  const spacer = document.createElement("div");
+  Object.assign(spacer.style, {
+    width: "1000px",
+    height: "1px"
+  });
+  document.body.appendChild(scroller);
+  scroller.appendChild(spacer);
+  scroller.scrollLeft = -1e3;
+  rtlHasScrollBug = scroller.scrollLeft >= 0;
+  scroller.remove();
+}
 const aggBucketSize = 1e3;
 const scrollToEdges = [
   "start",
@@ -2199,6 +2219,28 @@ const scrollToEdges = [
   "end-force"
 ];
 const filterProto = Array.prototype.filter;
+const setOverflowAnchor = window.getComputedStyle(document.body).overflowAnchor === void 0 ? noop : function(contentEl, index) {
+  if (contentEl === null) {
+    return;
+  }
+  if (contentEl._qOverflowAnimationFrame !== void 0) {
+    cancelAnimationFrame(contentEl._qOverflowAnimationFrame);
+  }
+  contentEl._qOverflowAnimationFrame = requestAnimationFrame(() => {
+    if (contentEl === null) {
+      return;
+    }
+    contentEl._qOverflowAnimationFrame = void 0;
+    const children = contentEl.children || [];
+    filterProto.call(children, (el2) => el2.dataset && el2.dataset.qVsAnchor !== void 0).forEach((el2) => {
+      delete el2.dataset.qVsAnchor;
+    });
+    const el = children[index];
+    if (el && el.dataset) {
+      el.dataset.qVsAnchor = "";
+    }
+  });
+};
 function sumFn(acc, h2) {
   return acc + h2;
 }
@@ -2220,7 +2262,7 @@ function getScrollDetails(parent, child, beforeRef, afterRef, horizontal, rtl, s
     }
     details.scrollMaxSize = parentCalc.scrollWidth;
     if (rtl === true) {
-      details.scrollStart = 0 - details.scrollStart;
+      details.scrollStart = (rtlHasScrollBug === true ? details.scrollMaxSize - details.scrollViewSize : 0) - details.scrollStart;
     }
   } else {
     if (parent === window) {
@@ -2269,7 +2311,7 @@ function setScroll(parent, scroll, horizontal, rtl) {
   if (parent === window) {
     if (horizontal === true) {
       if (rtl === true) {
-        scroll = 0 - scroll;
+        scroll = (rtlHasScrollBug === true ? document.body.scrollWidth - document.documentElement.clientWidth : 0) - scroll;
       }
       window.scrollTo(scroll, window.pageYOffset || window.scrollY || document.body.scrollTop || 0);
     } else {
@@ -2277,7 +2319,7 @@ function setScroll(parent, scroll, horizontal, rtl) {
     }
   } else if (horizontal === true) {
     if (rtl === true) {
-      scroll = 0 - scroll;
+      scroll = (rtlHasScrollBug === true ? parent.scrollWidth - parent.offsetWidth : 0) - scroll;
     }
     parent.scrollLeft = scroll;
   } else {
@@ -2473,6 +2515,7 @@ function useVirtualScroll({
         contentEl !== null && contentEl.removeEventListener("focusout", onBlurRefocusFn);
       });
     }
+    setOverflowAnchor(contentEl, toIndex - from);
     const sizeBefore = alignEnd !== void 0 ? virtualScrollSizes.slice(from, toIndex).reduce(sumFn, 0) : 0;
     if (rangeChanged === true) {
       const tempTo = to >= virtualScrollSliceRange.value.from && from <= virtualScrollSliceRange.value.to ? virtualScrollSliceRange.value.to : to;
@@ -2690,6 +2733,9 @@ function useVirtualScroll({
     } else {
       scrollTo(prevToIndex);
     }
+  });
+  onBeforeUnmount(() => {
+    onVirtualScrollEvt.cancel();
   });
   Object.assign(proxy, { scrollTo, reset, refresh });
   return {

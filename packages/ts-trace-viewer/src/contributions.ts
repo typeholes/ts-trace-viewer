@@ -15,7 +15,9 @@ const commandHandlers = new Map<string, (...args: any[]) => void>([
    [
       'ts-trace-viewer.openInBrowser',
       () => {
-         vscode.env.openExternal(vscode.Uri.parse(`http://localhost:3000/`));
+         vscode.env.openExternal(
+            vscode.Uri.parse(`http://localhost:3000/app/index.html`)
+         );
       },
    ],
 

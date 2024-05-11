@@ -1,5 +1,5 @@
-import { Q as QBtn } from "./QBtn.0e063299.js";
-import { F as defineComponent, G as openBlock, H as createElementBlock, R as createBaseVNode, I as createVNode } from "./index.30198bce.js";
+import { Q as QBtn } from "./QBtn.62120c33.js";
+import { F as defineComponent, G as openBlock, H as createElementBlock, R as createBaseVNode, I as createVNode } from "./index.354d01ba.js";
 const _hoisted_1 = { class: "fullscreen bg-blue text-white text-center q-pa-md flex flex-center" };
 const _hoisted_2 = /* @__PURE__ */ createBaseVNode("div", { style: { "font-size": "30vh" } }, " 404 ", -1);
 const _hoisted_3 = /* @__PURE__ */ createBaseVNode("div", {

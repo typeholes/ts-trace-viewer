@@ -2,44 +2,44 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 100;
-  src: url(/assets/KFOkCnqEu92Fr1MmgVxIIzQ.34e9582c.woff) format('woff');
+  src: url(/app/assets/KFOkCnqEu92Fr1MmgVxIIzQ.34e9582c.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 300;
-  src: url(/assets/KFOlCnqEu92Fr1MmSU5fBBc-.bf14c7d7.woff) format('woff');
+  src: url(/app/assets/KFOlCnqEu92Fr1MmSU5fBBc-.bf14c7d7.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: url(/assets/KFOmCnqEu92Fr1Mu4mxM.f2abf7fb.woff) format('woff');
+  src: url(/app/assets/KFOmCnqEu92Fr1Mu4mxM.f2abf7fb.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: url(/assets/KFOlCnqEu92Fr1MmEU9fBBc-.9ce7f3ac.woff) format('woff');
+  src: url(/app/assets/KFOlCnqEu92Fr1MmEU9fBBc-.9ce7f3ac.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  src: url(/assets/KFOlCnqEu92Fr1MmWUlfBBc-.e0fd57c0.woff) format('woff');
+  src: url(/app/assets/KFOlCnqEu92Fr1MmWUlfBBc-.e0fd57c0.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 900;
-  src: url(/assets/KFOlCnqEu92Fr1MmYUtfBBc-.f6537e32.woff) format('woff');
+  src: url(/app/assets/KFOlCnqEu92Fr1MmYUtfBBc-.f6537e32.woff) format('woff');
 }
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url('/assets/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.4a4dbc62.woff2') format('woff2'), url('/assets/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.fd84f88b.woff') format('woff');
+  src: url('/app/assets/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.4a4dbc62.woff2') format('woff2'), url('/app/assets/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.fd84f88b.woff') format('woff');
 }
 
 .material-icons {
