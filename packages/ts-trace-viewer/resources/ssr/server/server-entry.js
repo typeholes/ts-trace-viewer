@@ -8195,7 +8195,11 @@ const _sfc_main$5 = vue.defineComponent({
         label: "Open trace file",
         onClick: getFileData
       }, null, _parent));
-      _push(`</div>`);
+      _push(`<!--[-->`);
+      serverRenderer.ssrRenderList(vue.unref(appState).traceFiles, (file) => {
+        _push(`<div>${serverRenderer.ssrInterpolate(file.name)}</div>`);
+      });
+      _push(`<!--]--></div>`);
     };
   }
 });

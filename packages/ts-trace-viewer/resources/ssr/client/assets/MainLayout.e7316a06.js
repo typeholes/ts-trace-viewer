@@ -1,6 +1,6 @@
-import { h as hSlot, a as hUniqueSlot, b as hDir, c as hMergeSlot, Q as QBtn } from "./QBtn.125cd77c.js";
-import { c as createComponent, a as computed, h, r as ref, i as isRuntimeSsrPreHydration, o as onMounted, d as onBeforeUnmount, n as noop, e as nextTick, g as getCurrentInstance, l as listenOpts, f as inject, j as emptyRenderFn, k as layoutKey, w as watch, m as createDirective, p as client, q as leftClick, s as addEvt, t as preventDraggable, u as prevent, v as stop, x as position, y as cleanEvt, z as stopAndPrevent, A as withDirectives, B as provide, C as pageContainerKey, D as reactive, E as onUnmounted, F as defineComponent, G as openBlock, H as createElementBlock, I as createVNode, J as resolveComponent, K as createBlock, L as withCtx, M as createTextVNode, N as createBaseVNode, O as toDisplayString, P as unref } from "./index.b53dbeb9.js";
-import { u as useDarkProps, a as useDark, c as clearSelection, b as useModelToggleProps, d as useModelToggleEmits, e as useTimeout, f as useModelToggle, g as useHistory, h as between, i as usePreventScroll, s as scrollTargetProp, j as getScrollTarget, k as getVerticalScrollPosition, l as getHorizontalScrollPosition, m as getScrollbarWidth, z, n as appState, Q as QItemLabel, o as QItem, t as trpc, p as processTraceData } from "./appState.6d2e0aaf.js";
+import { h as hSlot, a as hUniqueSlot, b as hDir, c as hMergeSlot, Q as QBtn } from "./QBtn.0e063299.js";
+import { c as createComponent, a as computed, h, r as ref, i as isRuntimeSsrPreHydration, o as onMounted, d as onBeforeUnmount, n as noop, e as nextTick, g as getCurrentInstance, l as listenOpts, f as inject, j as emptyRenderFn, k as layoutKey, w as watch, m as createDirective, p as client, q as leftClick, s as addEvt, t as preventDraggable, u as prevent, v as stop, x as position, y as cleanEvt, z as stopAndPrevent, A as withDirectives, B as provide, C as pageContainerKey, D as reactive, E as onUnmounted, F as defineComponent, G as openBlock, H as createElementBlock, I as createVNode, J as Fragment, K as renderList, L as unref, M as toDisplayString, N as resolveComponent, O as createBlock, P as withCtx, Q as createTextVNode, R as createBaseVNode } from "./index.30198bce.js";
+import { u as useDarkProps, a as useDark, c as clearSelection, b as useModelToggleProps, d as useModelToggleEmits, e as useTimeout, f as useModelToggle, g as useHistory, h as between, i as usePreventScroll, s as scrollTargetProp, j as getScrollTarget, k as getVerticalScrollPosition, l as getHorizontalScrollPosition, m as getScrollbarWidth, z, n as appState, Q as QItemLabel, o as QItem, p as processTraceData, t as trpc } from "./appState.57efa897.js";
 var QToolbarTitle = createComponent({
   name: "QToolbarTitle",
   props: {
@@ -1541,7 +1541,12 @@ const _sfc_main$1 = defineComponent({
         createVNode(QBtn, {
           label: "Open trace file",
           onClick: getFileData
-        })
+        }),
+        (openBlock(true), createElementBlock(Fragment, null, renderList(unref(appState).traceFiles, (file) => {
+          return openBlock(), createElementBlock("div", {
+            key: file.name
+          }, toDisplayString(file.name), 1);
+        }), 128))
       ]);
     };
   }

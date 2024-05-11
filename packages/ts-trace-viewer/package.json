@@ -2,7 +2,7 @@
   "name": "ts-trace-viewer",
   "displayName": "ts-trace-viewer",
   "description": "view ts perf traces ",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "repository": "https://github.com/typeholes/ts-trace-viewer",
   "publisher": "typeholes",
