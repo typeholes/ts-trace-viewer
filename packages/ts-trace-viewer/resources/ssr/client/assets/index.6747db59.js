@@ -9693,12 +9693,12 @@ function extractChangingRecords(to, from) {
 const routes = [
   {
     path: "/",
-    component: () => __vitePreload(() => import("./MainLayout.393df5b9.js"), true ? ["assets/MainLayout.393df5b9.js","assets/QBtn.07d2d5f9.js","assets/use-router-link.c3705057.js","assets/appState.c45d123e.js"] : void 0),
-    children: [{ path: "", component: () => __vitePreload(() => import("./IndexPage.ef77800b.js"), true ? ["assets/IndexPage.ef77800b.js","assets/appState.c45d123e.js","assets/use-router-link.c3705057.js"] : void 0) }]
+    component: () => __vitePreload(() => import("./MainLayout.468dd59d.js"), true ? ["assets/MainLayout.468dd59d.js","assets/QBtn.f91393a2.js","assets/use-router-link.5a78fe4c.js","assets/appState.1b892c25.js"] : void 0),
+    children: [{ path: "", component: () => __vitePreload(() => import("./IndexPage.2797d525.js"), true ? ["assets/IndexPage.2797d525.js","assets/appState.1b892c25.js","assets/use-router-link.5a78fe4c.js"] : void 0) }]
   },
   {
     path: "/:catchAll(.*)*",
-    component: () => __vitePreload(() => import("./ErrorNotFound.9d66a080.js"), true ? ["assets/ErrorNotFound.9d66a080.js","assets/QBtn.07d2d5f9.js","assets/use-router-link.c3705057.js"] : void 0)
+    component: () => __vitePreload(() => import("./ErrorNotFound.e916c2a5.js"), true ? ["assets/ErrorNotFound.e916c2a5.js","assets/QBtn.f91393a2.js","assets/use-router-link.5a78fe4c.js"] : void 0)
   }
 ];
 var createRouter = route(function() {
@@ -9799,7 +9799,7 @@ createQuasarApp(createSSRApp, quasarUserOptions).then((app2) => {
     (bootFiles) => bootFiles.map((entry) => entry.default)
   ];
   return Promise[method]([
-    __vitePreload(() => import("./axios.e9a0e085.js"), true ? [] : void 0)
+    __vitePreload(() => import("./axios.51d931c6.js"), true ? [] : void 0)
   ]).then((bootFiles) => {
     const boot2 = mapFn(bootFiles).filter((entry) => typeof entry === "function");
     start(app2, boot2);

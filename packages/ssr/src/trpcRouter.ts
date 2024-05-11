@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type * as vscode from 'vscode';
 import { initTRPC } from '@trpc/server';
-import { createTRPCProxyClient, httpBatchLink } from '@trpc/client';
+import { createTRPCProxyClient, httpBatchLink, httpLink } from '@trpc/client';
 
 type TsTraceViewer = {
   durationWarning: number;
@@ -77,8 +77,10 @@ export type AppRouter = ReturnType<typeof mkAppRouter>;
 export const mkTrpc = (port: string) =>
   createTRPCProxyClient<AppRouter>({
     links: [
-      httpBatchLink({
+      // httpBatchLink({
+      httpLink({
         url: `http://localhost:${port}/trpc`,
+        // maxURLLength: 2083,
       }),
     ],
   });
