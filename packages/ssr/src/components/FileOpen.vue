@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getFileDataHandler } from 'src/processFile';
+import { appState } from 'src/appState';
 
 const pickerOpts = {
   types: [
@@ -32,5 +33,8 @@ async function getFileData() {
 <template>
   <div>
     <q-btn label="Open trace file" @click="getFileData" />
+    <div v-for="file in appState.traceFiles" :key="file.name">
+      {{  file.name }}
+    </div>
   </div>
 </template>
