@@ -4,7 +4,6 @@ A tool for interacting with tsc performance traces.
 
 https://marketplace.visualstudio.com/items?itemName=TypeHoles.ts-trace-viewer
 
-see the first_release branch for working code
 
 ## Working Features
 

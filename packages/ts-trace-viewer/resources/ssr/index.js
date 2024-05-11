@@ -34,6 +34,8 @@ function mkAppRouter(vs2, tsTraceViewer2) {
     addTraceDiagnostic: () => {
     },
     clearTraceDiagnostic: () => {
+    },
+    gotoPosition: () => {
     }
   };
   const appRouter = t.router({
@@ -48,6 +50,11 @@ function mkAppRouter(vs2, tsTraceViewer2) {
       const { fileName, pos, end, duration } = opts.input;
       tsTraceViewer2.addTraceDiagnostic(fileName, pos, end, duration);
       return "added";
+    }),
+    gotoPosition: t.procedure.input(import_zod.z.object({ fileName: import_zod.z.string(), pos: import_zod.z.number() })).query((opts) => {
+      const { fileName, pos } = opts.input;
+      tsTraceViewer2.gotoPosition(fileName, pos);
+      return "went";
     }),
     ping: t.procedure.query(() => {
       if (vs2) {
@@ -112,6 +119,8 @@ var init_vscodeApi = __esm({
       addTraceDiagnostic: () => {
       },
       clearTraceDiagnostic: () => {
+      },
+      gotoPosition: () => {
       }
     };
     console.log(tsTraceViewer);

@@ -31,9 +31,10 @@ const selectedLines = computed(
 
 const selectedName = ref('checkExpression');
 
-function openFile(fileName: string | undefined) {
-  if (!fileName) return;
-  trpc.openFile.query(fileName);
+
+function goto(fileName: string | undefined, pos: number | undefined) {
+  if (!fileName || !pos) return;
+  trpc.gotoPosition.query({ fileName, pos });
 }
 </script>
 
@@ -42,7 +43,7 @@ function openFile(fileName: string | undefined) {
     <q-select label="Name" :options="names" v-model="selectedName" />
     <div class="column">
       <div v-for="line of selectedLines" :key="line.ts">
-        <q-card @click="openFile(line.args?.path)" class="column">
+        <q-card class="column">
           <div>
             {{ line.name }} : {{ Math.round(line.dur ?? 0 / 1000) / 1000 }}
             {{
@@ -52,6 +53,11 @@ function openFile(fileName: string | undefined) {
               )
             }}
             : {{ line.args?.pos }}
+            <q-btn
+              v-if="line.args?.path && line.args?.pos"
+              label="goto"
+              @click="goto(line.args?.path, line.args?.pos)"
+            />
           </div>
           <div>
             <TypesDuring :ts="line.ts" :duration="line.dur ?? 0" />

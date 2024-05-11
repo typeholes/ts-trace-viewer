@@ -8587,40 +8587,10 @@ const _sfc_main$3 = vue.defineComponent({
       _push(serverRenderer.ssrRenderComponent(_component_q_card, vue.mergeProps({ class: "q-pl-md" }, _attrs), {
         default: vue.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div${_scopeId}> Types created: ${serverRenderer.ssrInterpolate(types.value.length)} <!--[-->`);
-            serverRenderer.ssrRenderList(types.value, (type) => {
-              _push2(`<div class="q-pl-md"${_scopeId}><div class="row justify-between"${_scopeId}><div class="col-1"${_scopeId}>ts: ${serverRenderer.ssrInterpolate(Math.round(type.ts ?? 0))}</div><div class="col-1"${_scopeId}>dur: ${serverRenderer.ssrInterpolate(Math.round(type.dur ?? 0))}</div><div class="col-1"${_scopeId}>id: ${serverRenderer.ssrInterpolate(type.id)}</div><div class="col-1"${_scopeId}>${serverRenderer.ssrInterpolate(type.recursionId)}</div><div class="col-8"${_scopeId}>${serverRenderer.ssrInterpolate(type.flags)}</div></div>`);
-              if (type.display) {
-                _push2(`<div class="q-pl-md"${_scopeId}>${serverRenderer.ssrInterpolate(type.display)}</div>`);
-              } else {
-                _push2(`<!---->`);
-              }
-              _push2(`</div>`);
-            });
-            _push2(`<!--]--></div>`);
+            _push2(`<div${_scopeId}> Types created: ${serverRenderer.ssrInterpolate(types.value.length)}</div>`);
           } else {
             return [
-              vue.createVNode("div", null, [
-                vue.createTextVNode(" Types created: " + vue.toDisplayString(types.value.length) + " ", 1),
-                (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(types.value, (type) => {
-                  return vue.openBlock(), vue.createBlock("div", {
-                    class: "q-pl-md",
-                    key: type.id
-                  }, [
-                    vue.createVNode("div", { class: "row justify-between" }, [
-                      vue.createVNode("div", { class: "col-1" }, "ts: " + vue.toDisplayString(Math.round(type.ts ?? 0)), 1),
-                      vue.createVNode("div", { class: "col-1" }, "dur: " + vue.toDisplayString(Math.round(type.dur ?? 0)), 1),
-                      vue.createVNode("div", { class: "col-1" }, "id: " + vue.toDisplayString(type.id), 1),
-                      vue.createVNode("div", { class: "col-1" }, vue.toDisplayString(type.recursionId), 1),
-                      vue.createVNode("div", { class: "col-8" }, vue.toDisplayString(type.flags), 1)
-                    ]),
-                    type.display ? (vue.openBlock(), vue.createBlock("div", {
-                      key: 0,
-                      class: "q-pl-md"
-                    }, vue.toDisplayString(type.display), 1)) : vue.createCommentVNode("", true)
-                  ]);
-                }), 128))
-              ])
+              vue.createVNode("div", null, " Types created: " + vue.toDisplayString(types.value.length), 1)
             ];
           }
         }),
@@ -8656,14 +8626,15 @@ const _sfc_main$2 = vue.defineComponent({
       ).sort((a, b) => b.dur - a.dur).slice(0, 50)
     );
     const selectedName = vue.ref("checkExpression");
-    function openFile(fileName) {
-      if (!fileName)
+    function goto(fileName, pos) {
+      if (!fileName || !pos)
         return;
-      trpc.openFile.query(fileName);
+      trpc.gotoPosition.query({ fileName, pos });
     }
     return (_ctx, _push, _parent, _attrs) => {
       const _component_q_select = vue.resolveComponent("q-select");
       const _component_q_card = vue.resolveComponent("q-card");
+      const _component_q_btn = vue.resolveComponent("q-btn");
       _push(`<div${serverRenderer.ssrRenderAttrs(_attrs)}>`);
       _push(serverRenderer.ssrRenderComponent(_component_q_select, {
         label: "Name",
@@ -8674,16 +8645,22 @@ const _sfc_main$2 = vue.defineComponent({
       _push(`<div class="column"><!--[-->`);
       serverRenderer.ssrRenderList(selectedLines.value, (line) => {
         _push(`<div>`);
-        _push(serverRenderer.ssrRenderComponent(_component_q_card, {
-          onClick: ($event) => openFile(line.args?.path),
-          class: "column"
-        }, {
+        _push(serverRenderer.ssrRenderComponent(_component_q_card, { class: "column" }, {
           default: vue.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`<div${_scopeId}>${serverRenderer.ssrInterpolate(line.name)} : ${serverRenderer.ssrInterpolate(Math.round(line.dur ?? 0 / 1e3) / 1e3)} ${serverRenderer.ssrInterpolate(line.args?.path?.replace(
                 new RegExp(`^.*${vue.unref(appState).projectPath ?? "."}/`),
                 "."
-              ))} : ${serverRenderer.ssrInterpolate(line.args?.pos)}</div><div${_scopeId}>`);
+              ))} : ${serverRenderer.ssrInterpolate(line.args?.pos)} `);
+              if (line.args?.path && line.args?.pos) {
+                _push2(serverRenderer.ssrRenderComponent(_component_q_btn, {
+                  label: "goto",
+                  onClick: ($event) => goto(line.args?.path, line.args?.pos)
+                }, null, _parent2, _scopeId));
+              } else {
+                _push2(`<!---->`);
+              }
+              _push2(`</div><div${_scopeId}>`);
               _push2(serverRenderer.ssrRenderComponent(_sfc_main$3, {
                 ts: line.ts,
                 duration: line.dur ?? 0
@@ -8691,10 +8668,17 @@ const _sfc_main$2 = vue.defineComponent({
               _push2(`</div>`);
             } else {
               return [
-                vue.createVNode("div", null, vue.toDisplayString(line.name) + " : " + vue.toDisplayString(Math.round(line.dur ?? 0 / 1e3) / 1e3) + " " + vue.toDisplayString(line.args?.path?.replace(
-                  new RegExp(`^.*${vue.unref(appState).projectPath ?? "."}/`),
-                  "."
-                )) + " : " + vue.toDisplayString(line.args?.pos), 1),
+                vue.createVNode("div", null, [
+                  vue.createTextVNode(vue.toDisplayString(line.name) + " : " + vue.toDisplayString(Math.round(line.dur ?? 0 / 1e3) / 1e3) + " " + vue.toDisplayString(line.args?.path?.replace(
+                    new RegExp(`^.*${vue.unref(appState).projectPath ?? "."}/`),
+                    "."
+                  )) + " : " + vue.toDisplayString(line.args?.pos) + " ", 1),
+                  line.args?.path && line.args?.pos ? (vue.openBlock(), vue.createBlock(_component_q_btn, {
+                    key: 0,
+                    label: "goto",
+                    onClick: ($event) => goto(line.args?.path, line.args?.pos)
+                  }, null, 8, ["onClick"])) : vue.createCommentVNode("", true)
+                ]),
                 vue.createVNode("div", null, [
                   vue.createVNode(_sfc_main$3, {
                     ts: line.ts,

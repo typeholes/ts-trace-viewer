@@ -44,6 +44,7 @@ declare namespace globalThis {
          duration: number
       ): void;
       clearTraceDiagnostic(): void;
+      gotoPosition(fileName: string, pos: number): void;
    };
 }
 
@@ -54,6 +55,7 @@ globalThis.tsTraceViewer = {
       durationWarning,
       addTraceDiagnostic,
       clearTraceDiagnostic: clearTaceDiagnostics,
+      gotoPosition,
    },
 };
 const limitKey = 'checkTimeWarning';
@@ -76,3 +78,19 @@ vscode.workspace.onDidChangeConfiguration((e) => {
       setLimit();
    }
 });
+
+async function gotoPosition(fileName: string, pos: number) {
+   const vs = vscode;
+   const uri = vs.Uri.file(fileName);
+   const document = await vs.workspace.openTextDocument(uri);
+   const position = document.positionAt(pos);
+   const location = new vs.Location(uri, position);
+   vs.commands.executeCommand(
+      'editor.action.goToLocations',
+      uri,
+      position,
+      [location],
+      'goto',
+      'location not found'
+   );
+}

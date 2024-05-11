@@ -9693,12 +9693,12 @@ function extractChangingRecords(to, from) {
 const routes = [
   {
     path: "/",
-    component: () => __vitePreload(() => import("./MainLayout.468dd59d.js"), true ? ["assets/MainLayout.468dd59d.js","assets/QBtn.f91393a2.js","assets/use-router-link.5a78fe4c.js","assets/appState.1b892c25.js"] : void 0),
-    children: [{ path: "", component: () => __vitePreload(() => import("./IndexPage.2797d525.js"), true ? ["assets/IndexPage.2797d525.js","assets/appState.1b892c25.js","assets/use-router-link.5a78fe4c.js"] : void 0) }]
+    component: () => __vitePreload(() => import("./MainLayout.7e7d5b7c.js"), true ? ["assets/MainLayout.7e7d5b7c.js","assets/QBtn.125cd77c.js","assets/appState.6d2e0aaf.js"] : void 0),
+    children: [{ path: "", component: () => __vitePreload(() => import("./IndexPage.bc882108.js"), true ? ["assets/IndexPage.bc882108.js","assets/appState.6d2e0aaf.js","assets/QBtn.125cd77c.js"] : void 0) }]
   },
   {
     path: "/:catchAll(.*)*",
-    component: () => __vitePreload(() => import("./ErrorNotFound.e916c2a5.js"), true ? ["assets/ErrorNotFound.e916c2a5.js","assets/QBtn.f91393a2.js","assets/use-router-link.5a78fe4c.js"] : void 0)
+    component: () => __vitePreload(() => import("./ErrorNotFound.f4978902.js"), true ? ["assets/ErrorNotFound.f4978902.js","assets/QBtn.125cd77c.js"] : void 0)
   }
 ];
 var createRouter = route(function() {
@@ -9799,10 +9799,10 @@ createQuasarApp(createSSRApp, quasarUserOptions).then((app2) => {
     (bootFiles) => bootFiles.map((entry) => entry.default)
   ];
   return Promise[method]([
-    __vitePreload(() => import("./axios.51d931c6.js"), true ? [] : void 0)
+    __vitePreload(() => import("./axios.d4b988cc.js"), true ? [] : void 0)
   ]).then((bootFiles) => {
     const boot2 = mapFn(bootFiles).filter((entry) => typeof entry === "function");
     start(app2, boot2);
   });
 });
-export { globalConfig as $, withDirectives as A, provide as B, pageContainerKey as C, reactive as D, onUnmounted as E, defineComponent as F, openBlock as G, createElementBlock as H, createVNode as I, resolveComponent as J, createBlock as K, withCtx as L, createTextVNode as M, createBaseVNode as N, toDisplayString as O, unref as P, isKeyCode as Q, History as R, getEventPath as S, Transition as T, onDeactivated as U, Platform as V, onBeforeUpdate as W, formKey as X, debounce as Y, injectProp as Z, onActivated as _, computed as a, Teleport as a0, onBeforeMount as a1, onUpdated as a2, isDeepEqual as a3, shouldIgnoreKey as a4, renderList as a5, createCommentVNode as a6, Fragment as a7, boot as b, createComponent as c, onBeforeUnmount as d, nextTick as e, inject as f, getCurrentInstance as g, h, isRuntimeSsrPreHydration as i, emptyRenderFn as j, layoutKey as k, listenOpts as l, createDirective as m, noop$1 as n, onMounted as o, client as p, leftClick as q, ref as r, addEvt as s, preventDraggable as t, prevent as u, stop as v, watch as w, position as x, cleanEvt as y, stopAndPrevent as z };
+export { globalConfig as $, withDirectives as A, provide as B, pageContainerKey as C, reactive as D, onUnmounted as E, defineComponent as F, openBlock as G, createElementBlock as H, createVNode as I, resolveComponent as J, createBlock as K, withCtx as L, createTextVNode as M, createBaseVNode as N, toDisplayString as O, unref as P, isKeyCode as Q, History as R, getEventPath as S, Transition as T, onDeactivated as U, Platform as V, onBeforeUpdate as W, formKey as X, debounce as Y, injectProp as Z, onActivated as _, computed as a, Teleport as a0, onBeforeMount as a1, onUpdated as a2, isDeepEqual as a3, shouldIgnoreKey as a4, Fragment as a5, renderList as a6, createCommentVNode as a7, boot as b, createComponent as c, onBeforeUnmount as d, nextTick as e, inject as f, getCurrentInstance as g, h, isRuntimeSsrPreHydration as i, emptyRenderFn as j, layoutKey as k, listenOpts as l, createDirective as m, noop$1 as n, onMounted as o, client as p, leftClick as q, ref as r, addEvt as s, preventDraggable as t, prevent as u, stop as v, watch as w, position as x, cleanEvt as y, stopAndPrevent as z };

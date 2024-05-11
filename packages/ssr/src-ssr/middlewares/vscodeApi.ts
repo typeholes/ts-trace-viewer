@@ -20,6 +20,7 @@ declare global {
       duration: number,
     ): void;
     clearTraceDiagnostic(): void;
+    gotoPosition(fileName: string, pos: number): void;
   };
 }
 
@@ -29,6 +30,9 @@ const tsTraceViewer = (globalThis.tsTraceViewer ??= {
     /**/
   },
   clearTraceDiagnostic: () => {
+    /**/
+  },
+  gotoPosition: () => {
     /**/
   },
 });

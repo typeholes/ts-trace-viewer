@@ -1,6 +1,6 @@
-import { u as useDarkProps, a as useDark, c as clearSelection, m as getScrollbarWidth, b as useModelToggleProps, s as scrollTargetProp, d as useModelToggleEmits, e as useTimeout, f as useModelToggle, j as getScrollTarget, g as useHistory, i as usePreventScroll, q as normalizeToInterval, Q as QItemLabel, o as QItem, n as appState, t as trpc } from "./appState.1b892c25.js";
-import { c as createComponent, a as computed, h, g as getCurrentInstance, f as inject, j as emptyRenderFn, k as layoutKey, C as pageContainerKey, i as isRuntimeSsrPreHydration, r as ref, o as onMounted, w as watch, W as onBeforeUpdate, d as onBeforeUnmount, X as formKey, Y as debounce, Z as injectProp, z as stopAndPrevent, e as nextTick, U as onDeactivated, _ as onActivated, u as prevent, T as Transition, Q as isKeyCode, s as addEvt, y as cleanEvt, l as listenOpts, $ as globalConfig, E as onUnmounted, a0 as Teleport, p as client, x as position, a1 as onBeforeMount, a2 as onUpdated, a3 as isDeepEqual, v as stop, a4 as shouldIgnoreKey, F as defineComponent, G as openBlock, K as createBlock, L as withCtx, N as createBaseVNode, M as createTextVNode, O as toDisplayString, H as createElementBlock, a5 as renderList, a6 as createCommentVNode, a7 as Fragment, I as createVNode, P as unref } from "./index.6747db59.js";
-import { h as hSlot, Q as QIcon, g as QSpinner, u as useSizeProps, e as useSize, b as hDir, m as hMergeSlotSafely, R as Ripple, n as getParentProxy, l as vmIsDestroyed, o as childHasFocus, c as hMergeSlot } from "./use-router-link.5a78fe4c.js";
+import { u as useDarkProps, a as useDark, c as clearSelection, m as getScrollbarWidth, b as useModelToggleProps, s as scrollTargetProp, d as useModelToggleEmits, e as useTimeout, f as useModelToggle, j as getScrollTarget, g as useHistory, i as usePreventScroll, q as normalizeToInterval, Q as QItemLabel, o as QItem, n as appState, t as trpc } from "./appState.6d2e0aaf.js";
+import { c as createComponent, a as computed, h, g as getCurrentInstance, f as inject, j as emptyRenderFn, k as layoutKey, C as pageContainerKey, i as isRuntimeSsrPreHydration, r as ref, o as onMounted, w as watch, W as onBeforeUpdate, d as onBeforeUnmount, X as formKey, Y as debounce, Z as injectProp, z as stopAndPrevent, e as nextTick, U as onDeactivated, _ as onActivated, u as prevent, T as Transition, Q as isKeyCode, s as addEvt, y as cleanEvt, l as listenOpts, $ as globalConfig, E as onUnmounted, a0 as Teleport, p as client, x as position, a1 as onBeforeMount, a2 as onUpdated, a3 as isDeepEqual, v as stop, a4 as shouldIgnoreKey, F as defineComponent, G as openBlock, K as createBlock, L as withCtx, N as createBaseVNode, O as toDisplayString, H as createElementBlock, I as createVNode, a5 as Fragment, a6 as renderList, M as createTextVNode, P as unref, a7 as createCommentVNode } from "./index.b53dbeb9.js";
+import { h as hSlot, i as QIcon, j as QSpinner, k as useSizeProps, l as useSize, b as hDir, m as hMergeSlotSafely, R as Ripple, n as getParentProxy, f as vmIsDestroyed, o as childHasFocus, c as hMergeSlot, Q as QBtn } from "./QBtn.125cd77c.js";
 var QCard = createComponent({
   name: "QCard",
   props: {
@@ -3843,16 +3843,6 @@ var QSelect = createComponent({
     return useField(state);
   }
 });
-const _hoisted_1$2 = { class: "row justify-between" };
-const _hoisted_2$1 = { class: "col-1" };
-const _hoisted_3 = { class: "col-1" };
-const _hoisted_4 = { class: "col-1" };
-const _hoisted_5 = { class: "col-1" };
-const _hoisted_6 = { class: "col-8" };
-const _hoisted_7 = {
-  key: 0,
-  class: "q-pl-md"
-};
 const _sfc_main$2 = defineComponent({
   __name: "TypesDuring",
   props: {
@@ -3872,25 +3862,7 @@ const _sfc_main$2 = defineComponent({
     return (_ctx, _cache) => {
       return openBlock(), createBlock(QCard, { class: "q-pl-md" }, {
         default: withCtx(() => [
-          createBaseVNode("div", null, [
-            createTextVNode(" Types created: " + toDisplayString(types.value.length) + " ", 1),
-            (openBlock(true), createElementBlock(Fragment, null, renderList(types.value, (type) => {
-              var _a, _b;
-              return openBlock(), createElementBlock("div", {
-                class: "q-pl-md",
-                key: type.id
-              }, [
-                createBaseVNode("div", _hoisted_1$2, [
-                  createBaseVNode("div", _hoisted_2$1, "ts: " + toDisplayString(Math.round((_a = type.ts) != null ? _a : 0)), 1),
-                  createBaseVNode("div", _hoisted_3, "dur: " + toDisplayString(Math.round((_b = type.dur) != null ? _b : 0)), 1),
-                  createBaseVNode("div", _hoisted_4, "id: " + toDisplayString(type.id), 1),
-                  createBaseVNode("div", _hoisted_5, toDisplayString(type.recursionId), 1),
-                  createBaseVNode("div", _hoisted_6, toDisplayString(type.flags), 1)
-                ]),
-                type.display ? (openBlock(), createElementBlock("div", _hoisted_7, toDisplayString(type.display), 1)) : createCommentVNode("", true)
-              ]);
-            }), 128))
-          ])
+          createBaseVNode("div", null, " Types created: " + toDisplayString(types.value.length), 1)
         ]),
         _: 1
       });
@@ -3924,10 +3896,10 @@ const _sfc_main$1 = defineComponent({
       }
     );
     const selectedName = ref("checkExpression");
-    function openFile(fileName) {
-      if (!fileName)
+    function goto(fileName, pos) {
+      if (!fileName || !pos)
         return;
-      trpc.openFile.query(fileName);
+      trpc.gotoPosition.query({ fileName, pos });
     }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", null, [
@@ -3942,30 +3914,34 @@ const _sfc_main$1 = defineComponent({
             return openBlock(), createElementBlock("div", {
               key: line.ts
             }, [
-              createVNode(QCard, {
-                onClick: ($event) => {
-                  var _a;
-                  return openFile((_a = line.args) == null ? void 0 : _a.path);
-                },
-                class: "column"
-              }, {
+              createVNode(QCard, { class: "column" }, {
                 default: withCtx(() => {
-                  var _a, _b, _c, _d, _e, _f;
+                  var _a, _b, _c, _d, _e, _f, _g, _h;
                   return [
-                    createBaseVNode("div", null, toDisplayString(line.name) + " : " + toDisplayString(Math.round((_a = line.dur) != null ? _a : 0 / 1e3) / 1e3) + " " + toDisplayString((_d = (_b = line.args) == null ? void 0 : _b.path) == null ? void 0 : _d.replace(
-                      new RegExp(`^.*${(_c = unref(appState).projectPath) != null ? _c : "."}/`),
-                      "."
-                    )) + " : " + toDisplayString((_e = line.args) == null ? void 0 : _e.pos), 1),
+                    createBaseVNode("div", null, [
+                      createTextVNode(toDisplayString(line.name) + " : " + toDisplayString(Math.round((_a = line.dur) != null ? _a : 0 / 1e3) / 1e3) + " " + toDisplayString((_d = (_b = line.args) == null ? void 0 : _b.path) == null ? void 0 : _d.replace(
+                        new RegExp(`^.*${(_c = unref(appState).projectPath) != null ? _c : "."}/`),
+                        "."
+                      )) + " : " + toDisplayString((_e = line.args) == null ? void 0 : _e.pos) + " ", 1),
+                      ((_f = line.args) == null ? void 0 : _f.path) && ((_g = line.args) == null ? void 0 : _g.pos) ? (openBlock(), createBlock(QBtn, {
+                        key: 0,
+                        label: "goto",
+                        onClick: ($event) => {
+                          var _a2, _b2;
+                          return goto((_a2 = line.args) == null ? void 0 : _a2.path, (_b2 = line.args) == null ? void 0 : _b2.pos);
+                        }
+                      }, null, 8, ["onClick"])) : createCommentVNode("", true)
+                    ]),
                     createBaseVNode("div", null, [
                       createVNode(_sfc_main$2, {
                         ts: line.ts,
-                        duration: (_f = line.dur) != null ? _f : 0
+                        duration: (_h = line.dur) != null ? _h : 0
                       }, null, 8, ["ts", "duration"])
                     ])
                   ];
                 }),
                 _: 2
-              }, 1032, ["onClick"])
+              }, 1024)
             ]);
           }), 128))
         ])

@@ -12,6 +12,7 @@ type TsTraceViewer = {
     duration: number,
   ): void;
   clearTraceDiagnostic(): void;
+  gotoPosition(fileName: string, pos: number): void;
 };
 
 export type addWarningArgs = z.infer<typeof addWarningArgs>;
@@ -33,6 +34,9 @@ export function mkAppRouter(vs: typeof vscode, tsTraceViewer: TsTraceViewer) {
     clearTraceDiagnostic: () => {
       /**/
     },
+    gotoPosition: () => {
+      /**/
+    },
   };
   const appRouter = t.router({
     durationWarning: t.procedure.query(() => {
@@ -47,6 +51,13 @@ export function mkAppRouter(vs: typeof vscode, tsTraceViewer: TsTraceViewer) {
       tsTraceViewer.addTraceDiagnostic(fileName, pos, end, duration);
       return 'added';
     }),
+    gotoPosition: t.procedure
+      .input(z.object({ fileName: z.string(), pos: z.number() }))
+      .query((opts) => {
+        const { fileName, pos } = opts.input;
+        tsTraceViewer.gotoPosition(fileName, pos);
+        return 'went';
+      }),
     ping: t.procedure.query(() => {
       if (vs) {
         vs.window.showInformationMessage('pinged from front end');
