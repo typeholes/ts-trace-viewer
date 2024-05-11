@@ -86,7 +86,7 @@ var init_trpcRouter = __esm({
     });
     mkTrpc = (port2) => (0, import_client.createTRPCProxyClient)({
       links: [
-        (0, import_client.httpBatchLink)({
+        (0, import_client.httpLink)({
           url: `http://localhost:${port2}/trpc`
         })
       ]
@@ -100,20 +100,21 @@ var vscodeApi_exports = {};
 __export(vscodeApi_exports, {
   default: () => vscodeApi_default
 });
-var import_wrappers2, trpcExpress, vs, vscodeApi_default;
+var import_wrappers2, trpcExpress, tsTraceViewer, vs, vscodeApi_default;
 var init_vscodeApi = __esm({
   "src-ssr/middlewares/vscodeApi.ts"() {
     "use strict";
     import_wrappers2 = require("quasar/wrappers");
     trpcExpress = __toESM(require("@trpc/server/adapters/express"));
     init_trpcRouter();
-    globalThis.tsTraceViewer ??= {
+    tsTraceViewer = globalThis.tsTraceViewer ??= {
       durationWarning: 15,
       addTraceDiagnostic: () => {
       },
       clearTraceDiagnostic: () => {
       }
     };
+    console.log(tsTraceViewer);
     vs = globalThis.vs;
     vscodeApi_default = (0, import_wrappers2.ssrMiddleware)(
       async ({ app: app2 }) => {

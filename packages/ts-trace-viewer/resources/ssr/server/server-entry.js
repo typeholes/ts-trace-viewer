@@ -8050,7 +8050,7 @@ zod.z.object({
 });
 const mkTrpc = (port) => client.createTRPCProxyClient({
   links: [
-    client.httpBatchLink({
+    client.httpLink({
       url: `http://localhost:${port}/trpc`
     })
   ]
@@ -8068,14 +8068,19 @@ trpc.projectPath.query().then((path) => appState.projectPath = path ?? ".").catc
 function processTraceData() {
   trpc.clearWarnings.query().then(() => {
     trpc.durationWarning.query().then((limit) => {
+      console.log("limit", limit);
       const data = [];
       for (const fileName in appState.traceFiles) {
         data.push(...appState.traceFiles[fileName].data);
       }
+      console.log("pushed trace data");
       data.sort((a, b) => a.ts - b.ts);
+      console.log("sorted trace data");
+      let remainingWarnings = 100;
       for (let i = 0; i < data.length; i++) {
-        data[i].idx = i;
         const line = data[i];
+        if (i % 1e3 === 0)
+          console.log("1000 processed");
         if (line.dur && line.dur > limit && line.args?.path && line.args?.pos && line.args?.end) {
           trpc.addWarning.query({
             fileName: line.args.path,
@@ -8083,6 +8088,9 @@ function processTraceData() {
             end: line.args.end,
             duration: line.dur
           });
+          console.log("sent warning");
+          if (--remainingWarnings < 0)
+            break;
         }
       }
       appState.data = data;
@@ -8645,7 +8653,7 @@ const _sfc_main$2 = vue.defineComponent({
     const selectedLines = vue.computed(
       () => appState.data?.filter(
         (x) => "name" in x && x.name === selectedName.value && (x.dur ?? 0) !== 0
-      ).sort((a, b) => b.dur - a.dur)
+      ).sort((a, b) => b.dur - a.dur).slice(0, 50)
     );
     const selectedName = vue.ref("checkExpression");
     function openFile(fileName) {

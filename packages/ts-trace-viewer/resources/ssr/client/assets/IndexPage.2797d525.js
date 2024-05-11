@@ -1,6 +1,6 @@
-import { u as useDarkProps, a as useDark, c as clearSelection, m as getScrollbarWidth, b as useModelToggleProps, s as scrollTargetProp, d as useModelToggleEmits, e as useTimeout, f as useModelToggle, j as getScrollTarget, g as useHistory, i as usePreventScroll, q as normalizeToInterval, Q as QItemLabel, o as QItem, n as appState, t as trpc } from "./appState.c45d123e.js";
-import { c as createComponent, a as computed, h, g as getCurrentInstance, f as inject, j as emptyRenderFn, k as layoutKey, C as pageContainerKey, i as isRuntimeSsrPreHydration, r as ref, o as onMounted, w as watch, W as onBeforeUpdate, d as onBeforeUnmount, X as formKey, Y as debounce, Z as injectProp, z as stopAndPrevent, e as nextTick, U as onDeactivated, _ as onActivated, u as prevent, T as Transition, Q as isKeyCode, s as addEvt, y as cleanEvt, l as listenOpts, $ as globalConfig, E as onUnmounted, a0 as Teleport, p as client, x as position, a1 as onBeforeMount, a2 as onUpdated, a3 as isDeepEqual, v as stop, a4 as shouldIgnoreKey, F as defineComponent, G as openBlock, K as createBlock, L as withCtx, N as createBaseVNode, M as createTextVNode, O as toDisplayString, H as createElementBlock, a5 as renderList, a6 as createCommentVNode, a7 as Fragment, I as createVNode, P as unref } from "./index.e3b57b54.js";
-import { h as hSlot, Q as QIcon, g as QSpinner, u as useSizeProps, e as useSize, b as hDir, m as hMergeSlotSafely, R as Ripple, n as getParentProxy, l as vmIsDestroyed, o as childHasFocus, c as hMergeSlot } from "./use-router-link.c3705057.js";
+import { u as useDarkProps, a as useDark, c as clearSelection, m as getScrollbarWidth, b as useModelToggleProps, s as scrollTargetProp, d as useModelToggleEmits, e as useTimeout, f as useModelToggle, j as getScrollTarget, g as useHistory, i as usePreventScroll, q as normalizeToInterval, Q as QItemLabel, o as QItem, n as appState, t as trpc } from "./appState.1b892c25.js";
+import { c as createComponent, a as computed, h, g as getCurrentInstance, f as inject, j as emptyRenderFn, k as layoutKey, C as pageContainerKey, i as isRuntimeSsrPreHydration, r as ref, o as onMounted, w as watch, W as onBeforeUpdate, d as onBeforeUnmount, X as formKey, Y as debounce, Z as injectProp, z as stopAndPrevent, e as nextTick, U as onDeactivated, _ as onActivated, u as prevent, T as Transition, Q as isKeyCode, s as addEvt, y as cleanEvt, l as listenOpts, $ as globalConfig, E as onUnmounted, a0 as Teleport, p as client, x as position, a1 as onBeforeMount, a2 as onUpdated, a3 as isDeepEqual, v as stop, a4 as shouldIgnoreKey, F as defineComponent, G as openBlock, K as createBlock, L as withCtx, N as createBaseVNode, M as createTextVNode, O as toDisplayString, H as createElementBlock, a5 as renderList, a6 as createCommentVNode, a7 as Fragment, I as createVNode, P as unref } from "./index.6747db59.js";
+import { h as hSlot, Q as QIcon, g as QSpinner, u as useSizeProps, e as useSize, b as hDir, m as hMergeSlotSafely, R as Ripple, n as getParentProxy, l as vmIsDestroyed, o as childHasFocus, c as hMergeSlot } from "./use-router-link.5a78fe4c.js";
 var QCard = createComponent({
   name: "QCard",
   props: {
@@ -3920,7 +3920,7 @@ const _sfc_main$1 = defineComponent({
             var _a2;
             return "name" in x && x.name === selectedName.value && ((_a2 = x.dur) != null ? _a2 : 0) !== 0;
           }
-        ).sort((a, b) => b.dur - a.dur);
+        ).sort((a, b) => b.dur - a.dur).slice(0, 50);
       }
     );
     const selectedName = ref("checkExpression");

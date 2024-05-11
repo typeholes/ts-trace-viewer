@@ -25,7 +25,8 @@ const selectedLines = computed(
         (x) =>
           'name' in x && x.name === selectedName.value && (x.dur ?? 0) !== 0,
       )
-      .sort((a, b) => b.dur! - a.dur!) as TraceLine[],
+      .sort((a, b) => b.dur! - a.dur!)
+      .slice(0, 50) as TraceLine[],
 );
 
 const selectedName = ref('checkExpression');
